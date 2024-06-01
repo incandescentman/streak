@@ -1,7 +1,7 @@
 * Introduction
 This project offers a visualization of a 100-day writing challenge, elegantly displaying one's progress in a calendar format.
 
-Inspired by the "100 Days of X" challenge, the endeavor is designed to keep one resolute and steadfast.
+Inspired by the "100 Days of X" challenge, the endeavor is designed to keep one resolute and steadfast, making it particularly beneficial for writers, creatives, and anyone looking to build consistent habits.
 
 Demo:
 https://incandescentman.github.io/streak/
@@ -17,7 +17,7 @@ A: Ah, the "100 Days of X" Challenge, sir, is a commendable endeavor where an in
 
 A: An excellent notion, sir. Committing to a "100 Days of Writing" challenge would undoubtedly hone your literary skills and foster a regular writing habit. Tracking your progress on a publicly available web-based calendar is a splendid idea, as it would add a layer of accountability and perhaps even inspire others to undertake similar challenges.
 
-Q: Jeeves, I'm finding myself inspired by [[https://lifehacker.com/jerry-seinfelds-productivity-secret-281626][this curious anecdote]] about Jerry Seinfeld's commitment to writing every day:
+** Q: Jeeves, I'm finding myself inspired by [[https://lifehacker.com/jerry-seinfelds-productivity-secret-281626][this curious anecdote]] about Jerry Seinfeld's commitment to writing every day:
 
 #+BEGIN_EXAMPLE org
 What is "Don't Break the Chain"?
@@ -30,7 +30,7 @@ Seeing the small wins laid out on the calendar also reminds you how they play in
 
 Don't Break the Chain's origins
 
-The original tip is attributed to Seinfeld and derived from a conversation he had with software developer Brad Isaac, who secured the hack "when /Seinfeld /was a new television show" and its titular character was doing real-life open mic nights and promo. Isaac, to his credit, took the intel straight to fledgling blog Lifehacker in 2007.
+The original tip is attributed to Seinfeld and derived from a conversation he had with software developer Brad Isaac, who secured the hack "when /Seinfeld/ was a new television show" and its titular character was doing real-life open mic nights and promo. Isaac, to his credit, took the intel straight to fledgling blog Lifehacker in 2007.
 
 "One night I was in the club where Seinfeld was working, and before he went on stage, I saw my chance. I had to ask Seinfeld if he had any tips for a young comic," explains Isaac. "He said the way to be a better comic was to create better jokes and the way to create better jokes was to write every day. But his advice was better than that. He had a gem of a leverage technique he used on himself and you can use it to motivate yourself---even when you don't feel like it."
 
@@ -42,9 +42,9 @@ A: An admirable and rather ingenious method, sir, to be sure. Jerry Seinfeld's "
 If I may add, sir, the psychological benefit of seeing a continuous string of successes is not to be underestimated. It transforms the abstract notion of progress into something tangible and visually rewarding. Should you require assistance in obtaining the necessary materials or further advice on structuring your writing regimen, I am at your disposal.
 
 * Functionality
-The "100 Days of Writing" project is a refined web-based application, designed to visualize the progress of a 100-day writing challenge. It meticulously reads data from an org-mode file named `progress.org`, which catalogues the status of each day's writing endeavor. The data is then processed and displayed on a web page in a neat calendar format.
+The "100 Days of Writing" project is a refined web-based application, designed to visualize the progress of a 100-day writing challenge. It meticulously reads data from an org-mode file named ~progress.org~, which catalogues the status of each day's writing endeavor. The data is then processed and displayed on a web page in a neat calendar format.
 
-The calendar is organized into rows, where each row represents a week, beginning with Monday and concluding with Sunday. A green square adorned with a checkmark signifies a completed task, a red square with a cross denotes a missed task, and an empty square represents a as yet looming in the future.
+The calendar is organized into rows, where each row represents a week, beginning with Monday and concluding with Sunday. A green square adorned with a checkmark signifies a completed task, a red square with a cross denotes a missed task, and an empty square represents a task as yet looming in the future.
 
 The calendar, in its wisdom, adjusts its layout based on the available screen width, maintaining its elegance across devices.
 
@@ -70,11 +70,11 @@ The project aspires to provide a straightforward and intuitive means of tracking
 #+end_src
 * Usage
 
-1. Open `index.html` in your preferred web browser. This file contains the structural essence of the page.
-2. Track your progress in progress.org. The webpage will be dynamically generated based on the entries in that file.
+1. Open ~index.html~ in your preferred web browser. This file contains the structural essence of the page.
+2. Track your progress in ~progress.org~. The webpage will be dynamically generated based on the entries in that file.
 3. Dynamic generation of the webpage is best experienced on a web server, not in a local folder.
 
-Your progress.org file might resemble the following:
+Your ~progress.org~ file might resemble the following:
 
 #+begin_example org
 * DONE <2024-05-27 Mon>
