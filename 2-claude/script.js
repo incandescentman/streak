@@ -1,6 +1,12 @@
 // Get the container element where the calendar will be rendered
 const container = document.getElementById('dayContainer');
 
+// Display version number
+const versionElement = document.getElementById('version');
+const version = 'v0.90';
+
+versionElement.textContent = version;
+
 // Initialize variables to keep track of the current day count and month
 let dayCount = 1;
 let currentMonth = '';
