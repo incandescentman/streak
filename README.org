@@ -11,25 +11,11 @@ https://incandescentman.github.io/streak/
 * FAQ
 ** Q: Say Jeeves, what is the "100 Days of X" Challenge?
 
-A: Ah, the "100 Days of X" Challenge, sir, is a commendable endeavor where
-an individual commits to practicing or engaging in a particular activity
-for a consecutive hundred days. This concept has gained popularity in
-various spheres, encouraging participants to develop new skills, habits,
-or projects through consistent daily effort. It could be anything from
-coding, writing, drawing, or even learning a new language. The objective
-is to foster discipline, create a sense of accomplishment, and, dare I
-say, turn one's daily routine into a more productive and enriching
-experience. Quite the modern take on self-improvement, if I may say so,
-sir.
+A: Ah, the "100 Days of X" Challenge, sir, is a commendable endeavor where an individual commits to practicing or engaging in a particular activity for a consecutive hundred days. This concept has gained popularity in various spheres, encouraging participants to develop new skills, habits, or projects through consistent daily effort. It could be anything from coding, writing, drawing, or even learning a new language. The objective is to foster discipline, create a sense of accomplishment, and, dare I say, turn one's daily routine into a more productive and enriching experience. Quite the modern take on self-improvement, if I may say so, sir.
 
 ** Q: Jeeves, I have half a mind to commit to a "100 Days of Writing" challenge, and to track my progress on a publicly available web-based calendar, ticking off each day as I go.
 
-A: An excellent notion, sir. Committing to a "100 Days of Writing"
-challenge would undoubtedly hone your literary skills and foster a
-regular writing habit. Tracking your progress on a publicly available
-web-based calendar is a splendid idea, as it would add a layer of
-accountability and perhaps even inspire others to undertake similar
-challenges.
+A: An excellent notion, sir. Committing to a "100 Days of Writing" challenge would undoubtedly hone your literary skills and foster a regular writing habit. Tracking your progress on a publicly available web-based calendar is a splendid idea, as it would add a layer of accountability and perhaps even inspire others to undertake similar challenges.
 
 Q: Jeeves, I'm finding myself inspired by [[https://lifehacker.com/jerry-seinfelds-productivity-secret-281626][this curious anecdote]] about Jerry Seinfeld's commitment to writing every day:
 
@@ -51,18 +37,9 @@ The original tip is attributed to Seinfeld and derived from a conversation he ha
 Per Isaac, Seinfeld's advice was "to get a big wall calendar that has a whole year on one page and hang it on a prominent wall," then get "a big red magic marker." According to the 2007 legend, it was Seinfeld himself who repeatedly emphasized the phrase "don't break the chain."
 #+END_EXAMPLE
 
-A: An admirable and rather ingenious method, sir, to be sure. Jerry
-Seinfeld's "Don't Break the Chain" technique is a splendid example of
-leveraging human psychology to foster consistent habits. By marking each
-day with an X, one creates a visual representation of progress that
-becomes increasingly motivating as the chain grows.
+A: An admirable and rather ingenious method, sir, to be sure. Jerry Seinfeld's "Don't Break the Chain" technique is a splendid example of leveraging human psychology to foster consistent habits. By marking each day with an X, one creates a visual representation of progress that becomes increasingly motivating as the chain grows.
 
-If I may add, sir, the psychological benefit of seeing a continuous
-string of successes is not to be underestimated. It transforms the
-abstract notion of progress into something tangible and visually
-rewarding. Should you require assistance in obtaining the necessary
-materials or further advice on structuring your writing regimen, I am at
-your disposal.
+If I may add, sir, the psychological benefit of seeing a continuous string of successes is not to be underestimated. It transforms the abstract notion of progress into something tangible and visually rewarding. Should you require assistance in obtaining the necessary materials or further advice on structuring your writing regimen, I am at your disposal.
 
 * Functionality
 The "100 Days of Writing" project is a refined web-based application, designed to visualize the progress of a 100-day writing challenge. It meticulously reads data from an org-mode file named `progress.org`, which catalogues the status of each day's writing endeavor. The data is then processed and displayed on a web page in a neat calendar format.
