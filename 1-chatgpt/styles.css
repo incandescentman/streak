@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+}
+
+h1 {
+    color: #333;
+}
+
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.day {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+    text-align: left;
+}
+
+.day.checked {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    font-size: 1.2em;
+}
