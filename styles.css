@@ -1,4 +1,4 @@
-body {
+ body {
     font-family: Arial, sans-serif;
     text-align: center;
     background-color: #f0f0f0;
@@ -20,6 +20,7 @@ h1 {
     display: contents; /* Ensures each week row is part of the same grid */
 }
 .day {
+    aspect-ratio: 1 / 1; /* Set the aspect ratio to 1:1 for square cells *
     background-color: #fff;
     border-radius: 5px;
     padding: 5px; /* Reduced padding */
@@ -34,7 +35,19 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
+
+.day p
+
+{
+    margin:0;
+    padding:0 0 10px 0;
+}
+
+
+
+
 .completed {
     background-color: #8bc34a;
     color: #fff;
@@ -61,14 +74,26 @@ h1 {
     color: #333;
 }
 .checkmark, .empty-square, .cross {
+    margin-top: 10px; /* Add some space before the icon */
     font-size: 3.5em; /* Adjusted font size */
-    margin-bottom: 10px; /* Add some space between the icon and the text */
+    margin-bottom: 3px; /* Add some space between the icon and the text */
 }
+
 .day-number {
     font-weight: bold;
     font-size: 1.1em;
+
 }
+
+.day-number p {
+    line-height: 0.8
+}
+
+
+
 .full-date {
     font-size: 0.9em;
     color: #666;
+    margin-bottom: 3px; /* Add some space between the icon and the text */
 }
+
