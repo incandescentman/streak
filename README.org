@@ -22,19 +22,47 @@ A: An excellent notion, sir. Committing to a "100 Days of Writing" challenge wou
 #+BEGIN_EXAMPLE org
 What is "Don't Break the Chain"?
 
-The idea is so simple: When you're trying to form a new habit or accomplish a long-term project, grab a calendar. Ideally, the calendar will be the real deal, physical kind, so you can really see it. Every day, employ the new habit or otherwise work on a step of the project you need to do, then mark an X on the calendar for that day.
+The idea is so simple: When you're trying to form a new habit or accomplish a
+long-term project, grab a calendar. Ideally, the calendar will be the real deal,
+physical kind, so you can really see it. Every day, employ the new habit or
+otherwise work on a step of the project you need to do, then mark an X on the
+calendar for that day.
 
-Right away, you'll get a visual reward from seeing the first X, then the second. Soon enough, you'll have a chain you don't want to break and you've gameified your productivity. People are simple creatures, wired to carry on patterns for silly rewards. It's why Snap streaks are so valuable to teenagers on Snapchat. Breaking a streak, no matter how silly it is, seems /wrong/. Fulfilling the streak feels /right/. It takes a long time to truly build a habit, so you need some kind of marker system to feel a little boost from it every day in the interim. That's why you don't break the chain.
+Right away, you'll get a visual reward from seeing the first X, then the second.
+Soon enough, you'll have a chain you don't want to break and you've gameified
+your productivity. People are simple creatures, wired to carry on patterns for
+silly rewards. It's why Snap streaks are so valuable to teenagers on Snapchat.
+Breaking a streak, no matter how silly it is, seems /wrong/. Fulfilling the
+streak feels /right/. It takes a long time to truly build a habit, so you need
+some kind of marker system to feel a little boost from it every day in the
+interim. That's why you don't break the chain.
 
-Seeing the small wins laid out on the calendar also reminds you how they play into your bigger goals, which can be helpful for motivation. As a bonus, write your goal in big letters on the top of the calendar page, so you always have it top of mind and can see how every day's efforts are leading toward its completion.
+Seeing the small wins laid out on the calendar also reminds you how they play
+into your bigger goals, which can be helpful for motivation. As a bonus, write
+your goal in big letters on the top of the calendar page, so you always have it
+top of mind and can see how every day's efforts are leading toward its
+completion.
 
 Don't Break the Chain's origins
 
-The original tip is attributed to Seinfeld and derived from a conversation he had with software developer Brad Isaac, who secured the hack "when /Seinfeld/ was a new television show" and its titular character was doing real-life open mic nights and promo. Isaac, to his credit, took the intel straight to fledgling blog Lifehacker in 2007.
+The original tip is attributed to Seinfeld and derived from a conversation he
+had with software developer Brad Isaac, who secured the hack "when /Seinfeld/
+was a new television show" and its titular character was doing real-life open
+mic nights and promo. Isaac, to his credit, took the intel straight to fledgling
+blog Lifehacker in 2007.
 
-"One night I was in the club where Seinfeld was working, and before he went on stage, I saw my chance. I had to ask Seinfeld if he had any tips for a young comic," explains Isaac. "He said the way to be a better comic was to create better jokes and the way to create better jokes was to write every day. But his advice was better than that. He had a gem of a leverage technique he used on himself and you can use it to motivate yourself---even when you don't feel like it."
+"One night I was in the club where Seinfeld was working, and before he went on
+stage, I saw my chance. I had to ask Seinfeld if he had any tips for a young
+comic," explains Isaac. "He said the way to be a better comic was to create
+better jokes and the way to create better jokes was to write every day. But his
+advice was better than that. He had a gem of a leverage technique he used on
+himself and you can use it to motivate yourself---even when you don't feel like
+it."
 
-Per Isaac, Seinfeld's advice was "to get a big wall calendar that has a whole year on one page and hang it on a prominent wall," then get "a big red magic marker." According to the 2007 legend, it was Seinfeld himself who repeatedly emphasized the phrase "don't break the chain."
+Per Isaac, Seinfeld's advice was "to get a big wall calendar that has a whole
+year on one page and hang it on a prominent wall," then get "a big red magic
+marker." According to the 2007 legend, it was Seinfeld himself who repeatedly
+emphasized the phrase "don't break the chain."
 #+END_EXAMPLE
 
 A: An admirable and rather ingenious method, sir, to be sure. Jerry Seinfeld's "Don't Break the Chain" technique is a splendid example of leveraging human psychology to foster consistent habits. By marking each day with an X, one creates a visual representation of progress that becomes increasingly motivating as the chain grows.
@@ -45,7 +73,7 @@ If I may add, sir, the psychological benefit of seeing a continuous string of su
 
 
 * Functionality
-Certainty, sir. The "100 Days of Writing" project is a refined web-based application, designed to visualize the progress of a 100-day writing challenge. It meticulously reads data from an org-mode text file named ~progress.org~, which catalogues the status of each day's writing endeavor. The data is then processed and displayed on a web page in a tidy calendar format.
+Very good, sir. The "100 Days of Writing" project is a refined web-based application, designed to visualize the progress of a 100-day writing challenge. It meticulously reads data from an org-mode text file named ~progress.org~, which catalogues the status of each day's writing endeavor. The data is then processed and displayed on a web page in a tidy calendar format.
 
 The calendar is organized into the finest rows, where each row represents a week, beginning with Monday and concluding with Sunday. An elegant green square adorned with a checkmark signifies a completed task, a menacing red square with a cross denotes a missed task, and an empty square represents a task as yet looming in the future.
 
