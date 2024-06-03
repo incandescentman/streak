@@ -88,7 +88,7 @@ The project aspires to provide a straightforward and intuitive means of tracking
 ├── index.html # The main HTML file
 ├── styles.css # The CSS file for styling
 ├── script.js  # The JavaScript file for functionality
-├── progress.org # The Org-mode file containing the progress data
+├── progress.org # The Org-mode file containing your progress data
 ├── README.md  # This README file
 #+end_src
 
