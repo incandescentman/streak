@@ -57,12 +57,8 @@ function processOrgModeData(orgModeData, container) {
             dayElement.classList.add('day');
 
             if (status === 'TODO' || status === 'DONE' || status === 'MISSED') {
-                if (!startCounting) {
-                    startCounting = true;
-                    dayCount = 1;
-                } else {
-                    dayCount++;
-                }
+                startCounting = true;
+                dayCount++;
                 dayElement.innerHTML = `
                     <p class="full-date">${dayOfWeek} ${monthDayYear}</p>
                     <p class="day-number">Day ${dayCount}</p>
