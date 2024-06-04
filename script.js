@@ -38,7 +38,6 @@ function processOrgModeData(orgModeData, container) {
 
     let dayCount = 0;
     let startCounting = false;
-    let firstDay = null;
 
     lines.forEach((line, index) => {
         console.log(`Processing line ${index + 1}: ${line}`);
@@ -53,15 +52,6 @@ function processOrgModeData(orgModeData, container) {
             }
             const dayOfWeek = date.toLocaleString('en-US', { weekday: 'short' });
             const monthDayYear = date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-
-            // Skip dates before the first valid status
-            if (!startCounting && !status) {
-                const dayElement = document.createElement('div');
-                dayElement.classList.add('day');
-                dayElement.innerHTML = `<p class="full-date">${dayOfWeek} ${monthDayYear}</p>`;
-                weekRow.appendChild(dayElement);
-                return;
-            }
 
             const dayElement = document.createElement('div');
             dayElement.classList.add('day');
