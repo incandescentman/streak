@@ -31,6 +31,8 @@ function parseDate(dateString) {
     return null;
 }
 
+
+
 function processOrgModeData(orgModeData, container) {
     const lines = orgModeData.trim().split('\n');
     let weekRow = document.createElement('div');
@@ -42,7 +44,7 @@ function processOrgModeData(orgModeData, container) {
         console.log(`Processing line ${index + 1}: ${line}`);
         if (line.startsWith('*')) {
             const parts = line.slice(2).trim().split(' ');
-            const status = parts[0];
+            const status = parts[0].trim();
             const dateString = parts[1];
             const date = parseDate(dateString);
             if (!date) {
@@ -51,7 +53,7 @@ function processOrgModeData(orgModeData, container) {
             }
 
             const dayOfWeek = date.toLocaleString('en-US', { weekday: 'short' });
-            const monthDayYear = date.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            const monthDayYear = date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
 
             const dayElement = document.createElement('div');
 
@@ -59,22 +61,22 @@ function processOrgModeData(orgModeData, container) {
                 dayCount++;
                 dayElement.classList.add('day', 'completed');
                 dayElement.innerHTML = `<span class="checkmark">✔</span>
-                    <p class="full-date">${dayOfWeek} ${monthDayYear}</p>
+                    <p class="full-date">${monthDayYear}</p>
                     <p class="day-number">Day ${dayCount}</p>`;
             } else if (status === 'MISSED') {
                 dayCount++;
                 dayElement.classList.add('day', 'missed');
                 dayElement.innerHTML = `<span class="cross">✘</span>
-                    <p class="full-date">${dayOfWeek} ${monthDayYear}</p>
+                    <p class="full-date">${monthDayYear}</p>
                     <p class="day-number">Day ${dayCount}</p>`;
             } else if (status === 'TODO') {
                 dayCount++;
                 dayElement.classList.add('day', 'todo');
                 dayElement.innerHTML = `<span class="empty-square">☐</span>
-                    <p class="full-date">${dayOfWeek} ${monthDayYear}</p>
+                    <p class="full-date">${monthDayYear}</p>
                     <p class="day-number">Day ${dayCount}</p>`;
             } else {
-                dayElement.innerHTML = `<p class="full-date">${dayOfWeek} ${monthDayYear}</p>`;
+                dayElement.innerHTML = `<p class="full-date">${monthDayYear}</p>`;
             }
 
             weekRow.appendChild(dayElement);
