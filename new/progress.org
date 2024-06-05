@@ -1,0 +1,70 @@
+#+TITLE: 100 Days of Writing
+#+HTML_HEAD: <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+#+HTML_HEAD_EXTRA: <style>
+#+HTML_HEAD_EXTRA: body {
+#+HTML_HEAD_EXTRA: background-color: #F3F4F6;
+#+HTML_HEAD_EXTRA: color: #1F2937;
+#+HTML_HEAD_EXTRA: }
+#+HTML_HEAD_EXTRA: </style>
+#+HTML_HEAD_EXTRA: <script>
+#+HTML_HEAD_EXTRA: document.addEventListener('DOMContentLoaded', () => {
+#+HTML_HEAD_EXTRA:   const container = document.getElementById('dayContainer');
+#+HTML_HEAD_EXTRA:   const outlines = document.querySelectorAll('.outline-2');
+#+HTML_HEAD_EXTRA:   let row, monthCell, month;
+#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:   outlines.forEach((outline, index) => {
+#+HTML_HEAD_EXTRA:     const timestamp = outline.querySelector('.timestamp-wrapper .timestamp').textContent;
+#+HTML_HEAD_EXTRA:     const status = outline.querySelector('.done') ? 'DONE' : (outline.querySelector('.todo') ? 'TODO' : ");
+#+HTML_HEAD_EXTRA:     const date = new Date(timestamp);
+#+HTML_HEAD_EXTRA:     const day = date.getDate();
+#+HTML_HEAD_EXTRA:     const dayName = date.toLocaleString('en-US', { weekday: 'short' });
+#+HTML_HEAD_EXTRA:     const monthName = date.toLocaleString('en-US', { month: 'short' });
+#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:     if (index % 7 === 0) {
+#+HTML_HEAD_EXTRA:       if (row) container.appendChild(row);
+#+HTML_HEAD_EXTRA:       row = document.createElement('div');
+#+HTML_HEAD_EXTRA:       row.classList.add('flex', 'items-center');
+#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:       monthCell = document.createElement('div');
+#+HTML_HEAD_EXTRA:       monthCell.classList.add('flex', 'items-center', 'justify-center', 'p-4', 'bg-blue-100', 'font-bold');
+#+HTML_HEAD_EXTRA:       monthCell.textContent = monthName;
+#+HTML_HEAD_EXTRA:       row.appendChild(monthCell);
+#+HTML_HEAD_EXTRA:     }
+#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:     const dayCell = document.createElement('div');
+#+HTML_HEAD_EXTRA:     dayCell.classList.add('flex', 'items-center', 'justify-center', 'p-4', 'bg-gray-200');
+#+HTML_HEAD_EXTRA:     if (status) {
+#+HTML_HEAD_EXTRA:       dayCell.classList.add(status === 'DONE' ? 'bg-green-200' : 'bg-yellow-200');
+#+HTML_HEAD_EXTRA:     }
+#+HTML_HEAD_EXTRA:     dayCell.textContent = `${dayName} ${day}`;
+#+HTML_HEAD_EXTRA:     row.appendChild(dayCell);
+#+HTML_HEAD_EXTRA:   });
+#+HTML_HEAD_EXTRA:
+#+HTML_HEAD_EXTRA:   if (row) container.appendChild(row);
+#+HTML_HEAD_EXTRA: });
+#+HTML_HEAD_EXTRA: </script>
+#+OPTIONS: toc:nil
+#+begin_export html
+<div id="dayContainer" class="grid grid-cols-8 gap-4">
+#+end_export
+* <2024-05-27 Mon>
+* <2024-05-28 Tue>
+* <2024-05-29 Wed>
+* DONE <2024-05-30 Thu>
+* DONE <2024-05-31 Fri>
+* MISSED <2024-06-01 Sat>
+* DONE <2024-06-02 Sun>
+* DONE <2024-06-03 Mon>
+* DONE <2024-06-04 Tue>
+* DONE <2024-06-05 Wed>
+* DONE <2024-06-06 Thu>
+* DONE <2024-06-07 Fri>
+* DONE <2024-06-08 Sat>
+* DONE <2024-06-09 Sun>
+* TODO <2024-06-10 Mon>
+* TODO <2024-06-11 Tue>
+* TODO <2024-06-12 Wed>
+
+#+begin_export html
+</div>
+#+end_export

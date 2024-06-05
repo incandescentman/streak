@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>100 Days of Writing</title>
+<meta name="author" content="Jay Dixit" />
+<meta name="generator" content="Org Mode" />
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+body {
+background-color: #F3F4F6;
+color: #1F2937;
+}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+const container = document.getElementById('dayContainer');
+const outlines = document.querySelectorAll('.outline-2');
+let row, monthCell, month;
+
+outlines.forEach((outline, index) => {
+const timestamp = outline.querySelector('.timestamp-wrapper .timestamp').textContent;
+const status = outline.querySelector('.done') ? 'DONE' : (outline.querySelector('.todo') ? 'TODO' : ");
+const date = new Date(timestamp);
+const day = date.getDate();
+const dayName = date.toLocaleString('en-US', { weekday: 'short' });
+const monthName = date.toLocaleString('en-US', { month: 'short' });
+
+if (index % 7 === 0) {
+if (row) container.appendChild(row);
+row = document.createElement('div');
+row.classList.add('flex', 'items-center');
+
+monthCell = document.createElement('div');
+monthCell.classList.add('flex', 'items-center', 'justify-center', 'p-4', 'bg-blue-100', 'font-bold');
+monthCell.textContent = monthName;
+row.appendChild(monthCell);
+}
+
+const dayCell = document.createElement('div');
+dayCell.classList.add('flex', 'items-center', 'justify-center', 'p-4', 'bg-gray-200');
+if (status) {
+dayCell.classList.add(status === 'DONE' ? 'bg-green-200' : 'bg-yellow-200');
+}
+dayCell.textContent = `${dayName} ${day}`;
+row.appendChild(dayCell);
+});
+
+if (row) container.appendChild(row);
+});
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<header>
+<h1 class="title">100 Days of Writing</h1>
+</header><div id="dayContainer" class="grid grid-cols-8 gap-4">
+<div id="outline-container-org5ce2ce1" class="outline-2">
+<h2 id="org5ce2ce1"><span class="timestamp-wrapper"><span class="timestamp">Mon 05/27/2024</span></span></h2>
+</div>
+<div id="outline-container-org2093852" class="outline-2">
+<h2 id="org2093852"><span class="timestamp-wrapper"><span class="timestamp">Tue 05/28/2024</span></span></h2>
+</div>
+<div id="outline-container-orgb13e84c" class="outline-2">
+<h2 id="orgb13e84c"><span class="timestamp-wrapper"><span class="timestamp">Wed 05/29/2024</span></span></h2>
+</div>
+<div id="outline-container-orgbef254f" class="outline-2">
+<h2 id="orgbef254f"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Thu 05/30/2024</span></span></h2>
+</div>
+<div id="outline-container-orgfeb7a1a" class="outline-2">
+<h2 id="orgfeb7a1a"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Fri 05/31/2024</span></span></h2>
+</div>
+<div id="outline-container-org61b5c6f" class="outline-2">
+<h2 id="org61b5c6f"><span class="todo MISSED">MISSED</span> <span class="timestamp-wrapper"><span class="timestamp">Sat 06/ 1/2024</span></span></h2>
+</div>
+<div id="outline-container-org78006a4" class="outline-2">
+<h2 id="org78006a4"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Sun 06/ 2/2024</span></span></h2>
+</div>
+<div id="outline-container-orgc85d7ab" class="outline-2">
+<h2 id="orgc85d7ab"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Mon 06/ 3/2024</span></span></h2>
+</div>
+<div id="outline-container-org4d979af" class="outline-2">
+<h2 id="org4d979af"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Tue 06/ 4/2024</span></span></h2>
+</div>
+<div id="outline-container-org3bb9b45" class="outline-2">
+<h2 id="org3bb9b45"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Wed 06/ 5/2024</span></span></h2>
+</div>
+<div id="outline-container-org94be47c" class="outline-2">
+<h2 id="org94be47c"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Thu 06/ 6/2024</span></span></h2>
+</div>
+<div id="outline-container-orgd3265c3" class="outline-2">
+<h2 id="orgd3265c3"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Fri 06/ 7/2024</span></span></h2>
+</div>
+<div id="outline-container-org0ea565b" class="outline-2">
+<h2 id="org0ea565b"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Sat 06/ 8/2024</span></span></h2>
+</div>
+<div id="outline-container-org0b90a2c" class="outline-2">
+<h2 id="org0b90a2c"><span class="done DONE">DONE</span> <span class="timestamp-wrapper"><span class="timestamp">Sun 06/ 9/2024</span></span></h2>
+</div>
+<div id="outline-container-org35d400b" class="outline-2">
+<h2 id="org35d400b"><span class="todo TODO">TODO</span> <span class="timestamp-wrapper"><span class="timestamp">Mon 06/10/2024</span></span></h2>
+</div>
+<div id="outline-container-org753acdb" class="outline-2">
+<h2 id="org753acdb"><span class="todo TODO">TODO</span> <span class="timestamp-wrapper"><span class="timestamp">Tue 06/11/2024</span></span></h2>
+</div>
+<div id="outline-container-org5dafe88" class="outline-2">
+<h2 id="org5dafe88"><span class="todo TODO">TODO</span> <span class="timestamp-wrapper"><span class="timestamp">Wed 06/12/2024</span></span></h2>
+<div class="outline-text-2" id="text-org5dafe88">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
