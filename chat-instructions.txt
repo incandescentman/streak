@@ -1,0 +1,9 @@
+Here is an HTML file called "progress.html" for my project, "100 Days of Writing." The HTML file is automatically generated from my Emacs org-mode data file "progress.org", which is where I keep track of my daily writing habit.
+
+Write a script.js Javascript file to dynamically parse the HTML:
+
+- use Tailwind.CSS
+- display 8 columns. 7 columns for the days, and the 8th column for the name of the month
+- display the days in a series of rows, with 7 days per row
+- parse the date of the last (7th) day of the row and detect what month it is in
+- display the name of the month in the 8th column
