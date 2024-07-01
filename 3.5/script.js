@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function processHtmlData(htmlData, container) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlData, 'text/html');
-    const lines = Array.from(doc.body.children);
+    const entries = doc.querySelectorAll('#content .outline-2');
 
     let weekRow = document.createElement('div');
     weekRow.classList.add('week-row');
@@ -22,9 +22,12 @@ function processHtmlData(htmlData, container) {
     let dayCount = 0;
     let daysInCurrentRow = 0;
 
-    for (const line of lines) {
-        const dateMatch = line.textContent.match(/(\d{4}-\d{2}-\d{2})/);
-        if (!dateMatch) continue;
+    entries.forEach((entry) => {
+        const h2 = entry.querySelector('h2');
+        if (!h2) return;
+
+        const dateMatch = h2.textContent.match(/(\d{4}-\d{2}-\d{2})/);
+        if (!dateMatch) return;
 
         const dateString = dateMatch[1];
         const date = new Date(dateString);
@@ -33,8 +36,11 @@ function processHtmlData(htmlData, container) {
         dayElement.classList.add('day');
         dayElement.innerHTML = `<p class="full-date">${date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' })}</p>`;
 
-        const status = line.textContent.split(' ')[0];
-        if (status === 'DONE' || status === 'MISSED' || status === 'TODO') {
+        const statusSpan = h2.querySelector('span.done, span.todo');
+        if (statusSpan) {
+            const status = statusSpan.classList.contains('done') ? 'DONE' :
+                           statusSpan.classList.contains('todo') && statusSpan.textContent === 'MISSED' ? 'MISSED' : 'TODO';
+
             dayCount++;
             dayElement.innerHTML += `<p class="day-number">Day ${dayCount}</p>`;
 
@@ -55,35 +61,24 @@ function processHtmlData(htmlData, container) {
 
         // If we've added 7 days to the current row, add the month column and start a new row
         if (daysInCurrentRow === 7) {
-            const monthElement = document.createElement('div');
-            monthElement.classList.add('month');
-            monthElement.textContent = date.toLocaleString('en-US', { month: 'long' });
-            weekRow.appendChild(monthElement);
-
-            container.appendChild(weekRow);
+            addMonthColumnAndAppendRow(weekRow, date, container);
             weekRow = document.createElement('div');
             weekRow.classList.add('week-row');
             daysInCurrentRow = 0;
         }
-    }
+    });
 
-    // Append any remaining days in the last week
+    // Handle the last row if it's not complete
     if (weekRow.children.length > 0) {
-        // If the last row is not complete, add empty cells to fill it
-        while (daysInCurrentRow < 7) {
-            const emptyElement = document.createElement('div');
-            emptyElement.classList.add('day', 'empty');
-            weekRow.appendChild(emptyElement);
-            daysInCurrentRow++;
-        }
-
-        // Add the month column for the last row
         const lastDate = new Date(weekRow.lastChild.querySelector('.full-date').textContent);
-        const monthElement = document.createElement('div');
-        monthElement.classList.add('month');
-        monthElement.textContent = lastDate.toLocaleString('en-US', { month: 'long' });
-        weekRow.appendChild(monthElement);
-
-        container.appendChild(weekRow);
+        addMonthColumnAndAppendRow(weekRow, lastDate, container);
     }
+}
+
+function addMonthColumnAndAppendRow(weekRow, date, container) {
+    const monthElement = document.createElement('div');
+    monthElement.classList.add('month');
+    monthElement.textContent = date.toLocaleString('en-US', { month: 'long' });
+    weekRow.appendChild(monthElement);
+    container.appendChild(weekRow);
 }
