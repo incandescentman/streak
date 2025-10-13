@@ -1,0 +1,334 @@
+#+TITLE: 100 Days of Writing Tracker - Work Log
+#+AUTHOR: Claude Code
+#+DATE: 2025-10-13
+
+* 2025-10-13: Critical Bug Fixes and Architecture Improvements
+
+** Problems Identified
+
+*** 1. Critical: CSS/JavaScript Grid Mismatch
+**** Location
+- =styles.css:17= - Grid configuration
+- =script.js:78-83= - Month column addition
+
+**** Problem Description
+The CSS grid was configured for 7 columns, but the JavaScript was adding 8 elements per row (7 day cells + 1 month label). This caused the month column to wrap to a new row or display incorrectly.
+
+#+BEGIN_SRC css
+/* Original - WRONG */
+grid-template-columns: repeat(7, 1fr);
+#+END_SRC
+
+#+BEGIN_SRC javascript
+// JavaScript adds 8th element
+monthElement.classList.add('month');
+weekRow.appendChild(monthElement); // This breaks the layout!
+#+END_SRC
+
+**** Impact
+- Month labels displayed incorrectly or wrapped to new rows
+- Calendar grid layout was visually broken
+- Inconsistent row structure across the page
+
+*** 2. Missing CSS Styling for Month Column
+**** Location
+- =styles.css= - No =.month= class styling existed
+
+**** Problem Description
+The JavaScript created month column elements with the =.month= class, but no CSS styling was defined for this class. This meant month labels appeared unstyled with default browser styling.
+
+**** Impact
+- Month labels had no visual consistency with day cells
+- No proper sizing, positioning, or styling
+- Poor user experience with inconsistent visual design
+
+*** 3. Fragile MISSED Status Detection
+**** Location
+- =script.js:41-42= - Status detection logic
+- =progress.html:40= - HTML structure
+
+**** Problem Description
+The code detected MISSED entries by checking text content rather than using CSS classes:
+
+#+BEGIN_SRC javascript
+// Original - FRAGILE
+statusSpan.classList.contains('todo') && statusSpan.textContent === 'MISSED'
+#+END_SRC
+
+This approach is fragile because:
+- Depends on exact text matching (case-sensitive, whitespace-sensitive)
+- Breaks if org-mode export changes text formatting
+- Violates separation of concerns (mixing content with logic)
+
+**** Impact
+- Potential bugs if export format changes
+- Harder to maintain and debug
+- Non-idiomatic approach to DOM querying
+
+*** 4. Unreliable Date Parsing
+**** Location
+- =script.js:73= - Date retrieval for incomplete rows
+
+**** Problem Description
+Code parsed formatted date strings from display text rather than storing/retrieving ISO dates:
+
+#+BEGIN_SRC javascript
+// Original - FRAGILE
+const lastDate = new Date(weekRow.lastChild.querySelector('.full-date').textContent);
+// Parsing "Sat, Jun 1, 2024" - locale-dependent!
+#+END_SRC
+
+**** Impact
+- Locale-dependent parsing could fail in different environments
+- Fragile dependency on display formatting
+- Risk of date parsing errors with timezone issues
+
+*** 5. Missing Error Handling
+**** Location
+- =script.js:14-30= - Main processing function
+
+**** Problem Description
+No error handling for:
+- Empty or missing data in progress.html
+- Malformed HTML structure
+- Incomplete rows without proper day elements
+
+**** Impact
+- Silent failures with no user feedback
+- JavaScript errors could crash the entire page
+- Debugging difficulties in production
+
+*** 6. Data Integrity Issues
+**** Location
+- =progress.html= - Timeline gaps
+
+**** Problem Description
+Timeline jumps from =2024-06-08= to =2024-06-30= (missing ~3 weeks of data).
+
+**** Impact
+- Irregular row lengths
+- Visual inconsistencies in calendar
+- Unclear whether this is intentional or data corruption
+
+** Solutions Implemented
+
+*** 1. Fixed CSS Grid Layout
+**** Changes
+- Updated =styles.css:17= from 7 to 8 columns
+
+#+BEGIN_SRC css
+/* Fixed - CORRECT */
+grid-template-columns: repeat(8, 1fr); /* 7 days + 1 month column */
+#+END_SRC
+
+**** Benefits
+- Month column now displays correctly in 8th grid column
+- Consistent row structure across all weeks
+- Proper calendar-like visual layout
+
+*** 2. Added Comprehensive Month Column Styling
+**** Changes
+- Added complete =.month= class styling in =styles.css:91-107=
+
+#+BEGIN_SRC css
+.month {
+    aspect-ratio: 1 / 1;              /* Square like day cells */
+    background-color: #e8e8e8;        /* Distinct gray background */
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    writing-mode: vertical-rl;        /* Vertical text orientation */
+    text-orientation: mixed;
+    padding: 10px;
+    box-sizing: border-box;
+}
+#+END_SRC
+
+**** Benefits
+- Visual consistency with day cells (same aspect ratio)
+- Clear visual distinction (different background color)
+- Vertical text orientation optimizes space usage
+- Professional, polished appearance
+
+*** 3. Improved Status Detection with CSS Classes
+**** Changes
+- Updated =script.js:42= to use =classList.contains('MISSED')=
+
+#+BEGIN_SRC javascript
+// Before - FRAGILE
+const status = statusSpan.classList.contains('done') ? 'DONE' :
+               statusSpan.classList.contains('todo') && statusSpan.textContent === 'MISSED' ? 'MISSED' : 'TODO';
+
+// After - ROBUST
+const status = statusSpan.classList.contains('done') ? 'DONE' :
+               statusSpan.classList.contains('MISSED') ? 'MISSED' : 'TODO';
+#+END_SRC
+
+**** Benefits
+- Idiomatic DOM querying using CSS classes
+- Immune to text formatting changes
+- Cleaner, more maintainable code
+- Better separation of concerns
+
+*** 4. Enhanced Date Handling with Data Attributes
+**** Changes
+- Added =data-date= attribute storage in =script.js:37=
+- Updated date retrieval to use =dataset.date= in =script.js:82-83=
+
+#+BEGIN_SRC javascript
+// Store ISO date when creating element
+dayElement.dataset.date = dateString; // e.g., "2024-06-01"
+
+// Retrieve ISO date reliably later
+const lastDateString = lastChild.dataset.date;
+const lastDate = lastDateString ? new Date(lastDateString) : new Date();
+#+END_SRC
+
+**** Benefits
+- Locale-independent date handling
+- Direct access to ISO date strings
+- No parsing of formatted display text
+- Future-proof and reliable
+
+*** 5. Added Comprehensive Error Handling
+**** Changes
+- Added empty data check in =script.js:19-23=
+- Added incomplete row safety checks in =script.js:80-85=
+
+#+BEGIN_SRC javascript
+// Check for empty data
+if (!entries || entries.length === 0) {
+    console.error('No entries found in progress.html');
+    container.innerHTML = '<p style="color: red;">No data found. Please check progress.html.</p>';
+    return;
+}
+
+// Safely handle incomplete rows
+if (weekRow.children.length > 0) {
+    const lastChild = weekRow.lastChild;
+    if (lastChild && lastChild.classList.contains('day')) {
+        // Safe to process
+    }
+}
+#+END_SRC
+
+**** Benefits
+- User-facing error messages for missing data
+- Graceful degradation instead of crashes
+- Console logging for debugging
+- Defensive programming prevents edge case failures
+
+** Testing and Verification
+
+*** Test Environment
+- Local HTTP server: =python3 -m http.server 8000=
+- Browser: localhost:8000
+- Files verified: styles.css, script.js, progress.html
+
+*** Verification Results
+✓ CSS grid: 8 columns configured correctly
+✓ Month styling: Present with vertical text orientation
+✓ MISSED detection: Using =classList.contains()=
+✓ Data attributes: =dataset.date= implemented throughout
+✓ Error handling: Comprehensive checks in place
+
+*** Files Modified
+- =styles.css= - Grid layout (7→8 columns) + month styling
+- =script.js= - Status detection, date handling, error handling
+
+** Architecture Notes
+
+*** Current Data Flow
+1. =progress.org= (Emacs org-mode) → Source of truth
+2. =progress.html= (HTML export) → Intermediate format
+3. JavaScript parsing → DOM manipulation
+4. CSS Grid layout → Visual presentation
+
+*** Key Design Decisions
+- *8-column grid*: 7 days + 1 month label per row
+- *Data attributes*: Store ISO dates for reliable retrieval
+- *CSS class-based logic*: Use classes not text for status detection
+- *Vertical month labels*: Space-efficient with =writing-mode: vertical-rl=
+
+*** Code Quality Improvements
+- Better separation of concerns (data vs. presentation)
+- Defensive programming with error handling
+- Locale-independent date handling
+- Idiomatic DOM manipulation patterns
+
+** Future Recommendations
+
+*** High Priority
+1. *Consistent data entry*: Decide on handling for unmarked entries (May 26-29, June 6-7)
+   - Current: Entries without TODO/DONE/MISSED are excluded from day count
+   - Consider: Should they be counted? Or removed from progress.html?
+
+2. *Data gap investigation*: Address 3-week gap from June 8 to June 30
+   - Verify if this is intentional or data loss
+   - Consider adding placeholder entries if needed
+
+3. *Testing infrastructure*: Add automated tests for:
+   - HTML parsing logic
+   - Date handling edge cases
+   - Status detection for all three states
+   - Grid layout with various row lengths
+
+*** Medium Priority
+1. *Month label logic*: Currently uses last day of row to determine month
+   - Works well for single-month weeks
+   - Consider split weeks spanning two months
+
+2. *Responsive design*: Current fixed 8-column grid
+   - Consider mobile breakpoints for smaller screens
+   - Possible alternative: Collapsible weeks on mobile
+
+3. *Accessibility improvements*:
+   - Add ARIA labels for status icons
+   - Ensure keyboard navigation works
+   - Test with screen readers
+
+*** Low Priority
+1. *Performance optimization*: Currently processes all entries synchronously
+   - Consider virtual scrolling for 100+ day challenges
+   - Add loading states for fetch operations
+
+2. *Visual enhancements*:
+   - Hover states for day cells
+   - Smooth transitions for state changes
+   - Progress indicators (e.g., "45/100 days complete")
+
+3. *Export functionality*:
+   - Generate shareable images of progress
+   - Export data to CSV or JSON
+
+** Lessons Learned
+
+*** What Worked Well
+- CSS Grid's =display: contents= for flexible row structure
+- Data attributes for storing metadata alongside elements
+- Vertical text orientation for space-efficient month labels
+
+*** What to Watch For
+- Grid column count must match actual elements added per row
+- Always provide CSS styling for JavaScript-generated classes
+- Prefer CSS classes over text content for logic decisions
+- Store data in attributes, not in formatted display text
+
+*** Testing Insights
+- Local server required for =fetch()= API (not file:// protocol)
+- Browser dev tools critical for debugging grid layout issues
+- Git diff review essential for catching logic changes
+
+** References
+
+- Project documentation: =WARP.md=
+- Live demo: https://incandescentman.github.io/streak/
+- Emacs org-mode HTML export: https://orgmode.org/manual/HTML-Export.html
+- CSS Grid Layout: https://css-tricks.com/snippets/css/complete-guide-grid/
+- Writing mode property: https://developer.mozilla.org/en-US/docs/Web/CSS/writing-mode
