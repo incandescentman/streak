@@ -1,6 +1,81 @@
 #+TITLE: 100 Days of Writing Tracker - Work Log
 #+AUTHOR: Claude Code
-#+DATE: 2025-10-13
+#+DATE: 2025-10-22
+
+* 2025-10-22: Added Bash Launcher Function
+
+** Overview
+Added a convenient bash function called =streak= to launch the tracker with a single command. This streamlines the workflow by automating server startup and browser launch.
+
+** Implementation Details
+
+*** Location
+- =/Users/jay/Library/CloudStorage/Dropbox/apps/bash-profile/jay-scripts.sh:1328-1348=
+
+*** Function Design
+#+BEGIN_SRC bash
+streak() {
+  local streak_dir="/Users/jay/Library/CloudStorage/Dropbox/github/streak"
+  local port=8001
+
+  printf "Very good, sir. Launching your writing streak tracker...\n"
+
+  # Navigate to streak directory and start server in background
+  (cd "$streak_dir" && python3 -m http.server "$port" > /dev/null 2>&1 &)
+
+  # Give the server a moment to start
+  sleep 0.5
+
+  # Open in browser
+  open "http://localhost:$port"
+
+  printf "📅  Tracker opened at http://localhost:$port\n"
+  printf "To stop the server: pkill -f 'python3 -m http.server $port'\n"
+}
+#+END_SRC
+
+*** Key Features
+1. *Automatic directory navigation*: Uses absolute path to streak directory
+2. *Silent background server*: Redirects output to /dev/null for clean UX
+3. *Port selection*: Uses port 8001 to avoid conflicts with port 8000
+4. *Browser auto-launch*: Opens default browser to tracker page
+5. *User feedback*: Provides clear startup message and shutdown instructions
+6. *Jeeves voice*: Matches existing script style with "Very good, sir" greeting
+
+*** Benefits
+- One-command launch: Just type =streak= from anywhere
+- No need to remember directory paths or port numbers
+- No need to manually open browser
+- Background process allows continued terminal usage
+- Clear instructions for stopping the server when done
+
+** User Workflow
+
+*** Before
+#+BEGIN_SRC bash
+cd /Users/jay/Library/CloudStorage/Dropbox/github/streak
+python3 -m http.server 8001
+# Open browser manually to localhost:8001
+#+END_SRC
+
+*** After
+#+BEGIN_SRC bash
+streak
+# Everything happens automatically
+#+END_SRC
+
+** Testing
+- ✓ Function added to jay-scripts.sh
+- ✓ Uses port 8001 (8000 was already in use during testing)
+- ✓ Server starts successfully in background
+- ✓ Browser opens to correct URL
+- ✓ Server runs silently without cluttering terminal
+
+** Notes
+- Server continues running after function completes
+- To stop: =pkill -f 'python3 -m http.server 8001'=
+- Function must be loaded into shell: =source jay-scripts.sh=
+- Compatible with existing =streak-sync= function (no naming conflicts)
 
 * 2025-10-13: Critical Bug Fixes and Architecture Improvements
 

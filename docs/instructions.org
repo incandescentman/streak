@@ -1,0 +1,161 @@
+#+TITLE: 100 Days of Writing Tracker - User Instructions
+#+AUTHOR: Jay Dixit
+#+DATE: 2025-10-22
+
+* Quick Start
+
+** Launch the Tracker
+
+Simply type in your terminal from anywhere:
+
+#+BEGIN_SRC bash
+streak
+#+END_SRC
+
+This will:
+- Start a local web server
+- Automatically open the tracker in your browser
+- Display your writing progress calendar
+
+** Stop the Server
+
+When you're done viewing the tracker:
+
+#+BEGIN_SRC bash
+pkill -f 'python3 -m http.server 8001'
+#+END_SRC
+
+* Tracking Your Progress
+
+** The Progress File
+
+Your daily writing entries are stored in:
+
+=/Users/jay/Library/CloudStorage/Dropbox/github/streak/progress.org=
+
+** Updating Your Progress
+
+Open =progress.org= and add entries in this format:
+
+#+BEGIN_SRC org
+* DONE <2024-05-27 Mon>
+* DONE <2024-05-28 Tue>
+* MISSED <2024-05-29 Wed>
+* TODO <2024-05-30 Thu>
+#+END_SRC
+
+** Status Keywords
+
+- =DONE= - You wrote that day ✓ (green checkmark)
+- =MISSED= - You skipped that day ✗ (red X)
+- =TODO= - Future day (empty square)
+
+** Tips
+
+1. Add dates as you complete each day
+2. Be honest with MISSED entries - they help you see patterns
+3. Future dates should be marked TODO
+4. Dates must be in org-mode format: =<YYYY-MM-DD Day>=
+
+* Understanding the Calendar
+
+** Layout
+
+The calendar displays:
+- Each row = one week (Monday through Sunday)
+- Month labels on the right side
+- Color-coded squares for each day's status
+
+** Visual Guide
+
+| Symbol | Meaning | Color |
+|--------+---------+-------|
+| ✓      | DONE    | Green |
+| ✗      | MISSED  | Red   |
+| (empty) | TODO   | Gray  |
+
+** Month Labels
+
+Vertical text on the right shows which month each week belongs to, based on the last day of that week.
+
+* Syncing to GitHub Pages
+
+To publish your progress to the live website:
+
+#+BEGIN_SRC bash
+streak-sync
+#+END_SRC
+
+This will:
+1. Sync your local progress to the GitHub Pages repository
+2. Commit the changes
+3. Push to GitHub
+4. Your progress will be visible at: https://incandescentman.github.io/streak/
+
+* Technical Details (Optional)
+
+** How It Works
+
+1. You edit =progress.org= (Emacs org-mode format)
+2. Org-mode exports to =progress.html=
+3. JavaScript reads =progress.html= and generates the calendar
+4. CSS Grid displays it as a visual calendar
+
+** Files
+
+- =progress.org= - Source data (edit this)
+- =progress.html= - HTML export (auto-generated)
+- =index.html= - Main page
+- =script.js= - Calendar generation logic
+- =styles.css= - Visual styling
+
+** Local Server
+
+The tracker requires a web server because:
+- JavaScript uses =fetch()= API to load =progress.html=
+- Browsers block =fetch()= on =file://= protocol for security
+- The =streak= command automatically handles this for you
+
+* Troubleshooting
+
+** Browser Shows "No Data Found"
+
+Check that:
+1. =progress.org= exists and has entries
+2. =progress.html= was exported from org-mode
+3. The server is running on port 8001
+
+** Calendar Looks Broken
+
+Try:
+1. Hard refresh your browser (Cmd+Shift+R)
+2. Check browser console for JavaScript errors
+3. Verify =styles.css= and =script.js= loaded correctly
+
+** Can't Stop Server
+
+If =pkill= doesn't work:
+
+#+BEGIN_SRC bash
+# Find the process ID
+lsof -i :8001
+
+# Kill by PID (replace 12345 with actual PID)
+kill 12345
+#+END_SRC
+
+* The Philosophy
+
+The "Don't Break the Chain" method (attributed to Jerry Seinfeld):
+
+1. Get a calendar
+2. Each day you write, mark it with an X
+3. After a few days, you'll have a chain
+4. Don't break the chain
+
+This tracker makes that visual and satisfying. The goal isn't perfection - it's consistency. Some red X's are okay. What matters is keeping the momentum going.
+
+* Questions or Issues?
+
+- GitHub Issues: https://github.com/incandescentman/streak/issues
+- README: https://incandescentman.github.io/streak/
